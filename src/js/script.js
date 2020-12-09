@@ -5,7 +5,8 @@ $(document).ready(function() {
         if (e.keyCode == 13 && $('.input').val() != '') {
             
             let $taskContent = $('<p class="taskContent"contenteditable="true"></p>').text($('.input').val());
-            let $task = $('<div class="task"></div>').append($taskContent)
+            let $task = $('<div class="task"></div>').append($taskContent);
+            let $arrow = $('<i class="fa fa-arrows handle"></i>');
             let $del = $('<i class="fa fa-close"></i>').on('click', function() {
                 const p = $(this).parent();
                 p.fadeOut(function() {
@@ -23,11 +24,16 @@ $(document).ready(function() {
                 
             });
 
-            $task.append($del, $comp);
-            $('.allTasks').append($task);
+            $task.append($del, $comp, $arrow);
+
+            $('.allTasks').append($task).sortable({
+                handle: '.handle',
+                revert: 100
+            });
 
 
             $('.input').val('');
+
         }
     });
 
